@@ -18,12 +18,14 @@ export enum FormFieldType {
     SKELETON = 'skeleton'
 }
 import {UserFormValidation} from "../lib/validation";
+import { useRouter } from "next/navigation";
 
 
 
 
 
 const PatientForm = () => {
+    const router = useRouter()
     const [isLoading, setIsLoading] = useState(false);
 
     // 1. Define your form.
@@ -37,23 +39,25 @@ const PatientForm = () => {
     })
 
     // 2. Define a submit handler.
-    function onSubmit({name, email, phone}: z.infer<typeof UserFormValidation>) {
+    async function onSubmit({name, email, phone}: z.infer<typeof UserFormValidation>) {
         // Do something with the form values.
         //  This will take inputs from the form
         // and create a user object to be stored in 
         // in the object
         setIsLoading(true);
-        try{
-            // Create a new user
-            const user = {
-                name,
-                email,
-                phone
-            }
-        }
-        catch(error){
-            console.log(error)
-        }
+        // try{
+        //     // Create a new user
+        //     const userData = {
+        //         name,
+        //         email,
+        //         phone
+        //     }
+        //     const user = await createUser(userData);
+        //     if(user) router.push(`/patients/${user.$id}/register`)
+        // }
+        // catch(error){
+        //     console.log(error)
+        // }
     }
     return (
         <Form {...form}>
